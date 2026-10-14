@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Traffic Prediction</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            🚦 TrafficAI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="index.html">Home</a>
+
+            <a href="predict.html">Prediction</a>
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="patterns.html">Patterns</a>
+
+            <a href="reports.html">Reports</a>
+
+            <a href="about.html">About</a>
+
+        </div>
+
+    </nav>
+
+
+    <section class="prediction-section">
+
+        <h1>Traffic Congestion Prediction</h1>
+
+        <p>
+            Enter the traffic conditions to predict
+            the congestion level.
+        </p>
+
+
+        <form id="predictionForm">
+
+            <label>Location</label>
+
+            <select id="location">
+
+                <option value="">Select Location</option>
+
+                <option>Main Road</option>
+                <option>City Center</option>
+                <option>Highway</option>
+                <option>Junction</option>
+
+            </select>
+
+
+            <label>Date</label>
+
+            <input type="date" id="date">
+
+
+            <label>Time</label>
+
+            <input type="time" id="time">
+
+
+            <label>Weather</label>
+
+            <select id="weather">
+
+                <option value="">Select Weather</option>
+
+                <option>Sunny</option>
+                <option>Cloudy</option>
+                <option>Rainy</option>
+
+            </select>
+
+
+            <label>Vehicle Count</label>
+
+            <input
+                type="number"
+                id="vehicleCount"
+                placeholder="Enter number of vehicles"
+            >
+
+
+            <label>Average Speed (km/h)</label>
+
+            <input
+                type="number"
+                id="speed"
+                placeholder="Enter average speed"
+            >
+
+
+            <button type="submit">
+                Predict Traffic
+            </button>
+
+        </form>
+
+
+        <div id="predictionResult"></div>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            © 2026 Traffic Congestion Pattern Mining System
+        </p>
+
+    </footer>
+
+
+    <script src="prediction.js"></script>
+
+</body>
+
+</html>

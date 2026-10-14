@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Traffic Prediction | TrafficAI</title>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+        .prediction-section {
+            max-width: 650px;
+            margin: 40px auto;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .prediction-section h1,
+        .prediction-section > p {
+            text-align: center;
+        }
+
+        #predictionForm {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        #predictionForm label {
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        #predictionForm input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #ccd5df;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        #predictionForm button {
+            margin-top: 15px;
+            padding: 13px;
+            border: none;
+            border-radius: 6px;
+            background: #f77f00;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        #predictionForm button:hover {
+            background: #d96c00;
+        }
+
+        #predictionForm button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+
+    
+#predictionResult {
+    display: block;
+    margin-top: 25px;
+    padding: 18px;
+    border-radius: 8px;
+    overflow-wrap: anywhere;
+}
+
+
+        #predictionResult h2 {
+            margin-top: 0;
+        }
+
+        .result-low {
+            background: #e4f7e9;
+            color: #176b32;
+        }
+
+        .result-medium {
+            background: #fff1d6;
+            color: #805000;
+        }
+
+        .result-high {
+            background: #ffe5e5;
+            color: #a51f1f;
+        }
+
+        .result-error {
+            background: #fce8e6;
+            color: #a51f1f;
+        }
+
+        .form-note {
+            font-size: 14px;
+            color: #555555;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            🚦 TrafficAI
+        </div>
+
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/predict.html">Prediction</a>
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/patterns.html">Patterns</a>
+            <a href="/reports.html">Reports</a>
+            <a href="/about.html">About</a>
+        </div>
+    </nav>
+
+    <section class="prediction-section">
+
+        <h1>Traffic Congestion Prediction</h1>
+
+        <p>
+            Enter the traffic index values to estimate the congestion category
+            using the trained Machine Learning model.
+        </p>
+
+        <form id="predictionForm">
+
+            <label for="averageTCI">Average TCI</label>
+            <input
+                type="number"
+                id="averageTCI"
+                name="AverageTCI"
+                placeholder="Example: 18.33"
+                min="0"
+                step="any"
+                required
+            >
+
+            <label for="maxTCI">Maximum TCI</label>
+            <input
+                type="number"
+                id="maxTCI"
+                name="MaxTCI"
+                placeholder="Example: 88.90"
+                min="0"
+                step="any"
+                required
+            >
+
+            <p class="form-note">
+                Enter the Average TCI and Maximum TCI values for a city.
+                Both values must be non-negative, and Average TCI should
+                not exceed Maximum TCI.
+            </p>
+
+            <button type="submit" id="predictButton">
+                Predict Traffic
+            </button>
+
+        </form>
+
+        <div id="predictionResult" role="status" aria-live="polite"></div>
+
+    </section>
+
+    <footer>
+        <p>
+            © 2026 Traffic Congestion Pattern Mining System |
+            Academic Project
+        </p>
+    </footer>
+
+    <script src="/static/js/prediction.js"></script>
+
+</body>
+</html>

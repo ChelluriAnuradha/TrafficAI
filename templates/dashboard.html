@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Traffic Dashboard</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <style>
+
+        /* ------------------------------
+           BASIC SETTINGS
+        ------------------------------ */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #222;
+        }
+
+
+        /* ------------------------------
+           NAVIGATION BAR
+        ------------------------------ */
+
+        nav {
+            background-color: #102a43;
+            color: white;
+
+            padding: 18px 50px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #ffb703;
+        }
+
+
+        /* ------------------------------
+           DASHBOARD TITLE
+        ------------------------------ */
+
+        .dashboard {
+            padding: 50px;
+        }
+
+        .dashboard h1 {
+            text-align: center;
+
+            font-size: 40px;
+
+            color: #102a43;
+
+            margin-bottom: 10px;
+        }
+
+        .dashboard-description {
+            text-align: center;
+
+            font-size: 18px;
+
+            margin-bottom: 40px;
+        }
+
+
+        /* ------------------------------
+           STATISTICS CARDS
+        ------------------------------ */
+
+        
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.stat-card {
+    background-color: white;
+    width: 230px;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+
+.stat-card h2 {
+    color: #102a43;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.stat-card p {
+    font-size: 30px;
+    font-weight: bold;
+    color: #f77f00;
+}
+
+
+
+        /* ------------------------------
+           CHART CONTAINER
+        ------------------------------ */
+
+        .chart-container {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 30px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 40px;
+        }
+
+
+        
+.chart-box {
+    background-color: white;
+    width: 500px;
+    height: 350px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+
+        .chart-box h2 {
+
+            text-align: center;
+
+            color: #102a43;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* ------------------------------
+           FOOTER
+        ------------------------------ */
+
+        footer {
+
+            background-color: #102a43;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            margin-top: 40px;
+
+            line-height: 1.8;
+        }
+
+
+        /* ------------------------------
+           MOBILE
+        ------------------------------ */
+
+        @media (max-width: 700px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .dashboard {
+                padding: 30px 15px;
+            }
+
+            .chart-box {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ==================================
+         NAVIGATION
+    =================================== -->
+
+    <nav>
+
+        <div class="logo">
+            🚦 TrafficAI
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="/index.html">
+                Home
+            </a>
+
+            <a href="/predict.html">
+                Prediction
+            </a>
+
+            <a href="/dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="/patterns.html">
+                Patterns
+            </a>
+
+            <a href="/reports.html">
+                Reports
+            </a>
+
+            <a href="/about.html">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ==================================
+         DASHBOARD
+    =================================== -->
+
+    <section class="dashboard">
+
+
+        <h1>
+            Traffic Dashboard
+        </h1>
+
+
+        <p class="dashboard-description">
+
+            View traffic statistics, congestion levels
+            and traffic patterns.
+
+        </p>
+
+
+
+        <!-- ==================================
+             STATISTICS CARDS
+        =================================== -->
+
+        
+
+<div class="stats-container">
+
+    <div class="stat-card">
+        <h2>Total Cities</h2>
+        <p id="totalCities">Loading...</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>Highest Congestion City</h2>
+        <p id="highestCity">Loading...</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>Average TCI</h2>
+        <p id="averageTCI">Loading...</p>
+    </div>
+
+    <div class="stat-card">
+        <h2>Maximum TCI</h2>
+        <p id="maximumTCI">Loading...</p>
+    </div>
+
+</div>
+
+
+
+        <!-- ==================================
+             CHARTS
+        =================================== -->
+
+        <div class="chart-container">
+
+
+            <!-- Traffic by Hour -->
+
+            <div class="chart-box">
+
+                <h2>
+                    Traffic by Hour
+                </h2>
+
+                <canvas id="trafficChart">
+                </canvas>
+
+            </div>
+
+
+
+            <!-- Congestion Distribution -->
+
+            <div class="chart-box">
+
+                <h2>
+                    Congestion Distribution
+                </h2>
+
+                <canvas id="congestionChart">
+                </canvas>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==================================
+             LOCATION CHART
+        =================================== -->
+
+        <div class="chart-container">
+
+
+            <div class="chart-box">
+
+                <h2>
+                    Traffic by Location
+                </h2>
+
+                <canvas id="locationChart">
+                </canvas>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ==================================
+         FOOTER
+    =================================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Traffic Congestion
+            Pattern Mining System
+        </p>
+
+        <p>
+            Academic Project
+        </p>
+
+    </footer>
+
+
+
+    <!-- ==================================
+         JAVASCRIPT / CHARTS
+    =================================== -->
+
+    <script>
+
+
+
+
+async function loadDashboard() {
+    try {
+        // Load statistics from Flask
+        const statsResponse = await fetch("/api/stats");
+
+        if (!statsResponse.ok) {
+            throw new Error("Could not load dashboard statistics");
+        }
+
+        const stats = await statsResponse.json();
+
+        document.getElementById("totalCities").textContent =
+            stats.totalCities;
+
+        document.getElementById("highestCity").textContent =
+            stats.highestCity;
+
+        document.getElementById("averageTCI").textContent =
+            Number(stats.averageTCI).toFixed(2);
+
+        document.getElementById("maximumTCI").textContent =
+            Number(stats.maximumTCI).toFixed(2);
+
+        // Load Chart.js if it did not load from the CDN
+        if (typeof Chart === "undefined") {
+            await new Promise((resolve, reject) => {
+                const script = document.createElement("script");
+                script.src =
+                    "https://cdn.jsdelivr.net/npm/chart.js";
+                script.onload = resolve;
+                script.onerror = () =>
+                    reject(new Error("Chart.js could not load"));
+                document.head.appendChild(script);
+            });
+        }
+
+        // Get the top cities directly from the backend
+        const cities = stats.topCities || [];
+
+        if (cities.length === 0) {
+            throw new Error("No city data is available");
+        }
+
+        const labels = cities.map(city => city.City);
+        const values = cities.map(city => Number(city.AverageTCI));
+
+        // Chart 1: Average TCI by city
+        new Chart(document.getElementById("trafficChart"), {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Average TCI",
+                    data: values,
+                    borderColor: "#f77f00",
+                    backgroundColor: "rgba(247, 127, 0, 0.15)",
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Chart 2: Congestion categories
+      
+        // Chart 2: Congestion categories from backend
+        const summary = stats.categorySummary || {};
+
+        const categories = {
+            Low: Number(summary.Low || 0),
+            Medium: Number(summary.Medium || 0),
+            High: Number(summary.High || 0)
+        };
+
+        new Chart(document.getElementById("congestionChart"), {
+            type: "doughnut",
+            data: {
+                labels: Object.keys(categories),
+                datasets: [{
+                    data: Object.values(categories),
+                    backgroundColor: [
+                        "#16a085",
+                        "#ffb703",
+                        "#e74c3c"
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Chart 3: Traffic by location (city)
+        new Chart(document.getElementById("locationChart"), {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Average TCI",
+                    data: values,
+                    backgroundColor: "#f77f00"
+                }]
+            },
+            options: {
+                indexAxis: "y",
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+    } catch (error) {
+        console.error("Dashboard loading error:", error);
+
+        document.querySelector(".dashboard-description").textContent =
+            "Dashboard data or charts could not load. Check the browser console and Flask terminal.";
+    }
+}
+
+loadDashboard();
+
+    </script>
+
+
+</body>
+
+</html>

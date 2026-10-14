@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Traffic Patterns</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+        }
+
+        nav {
+            background-color: #102a43;
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .patterns-section {
+            padding: 50px;
+            text-align: center;
+        }
+
+        .patterns-section h1 {
+            color: #102a43;
+        }
+
+        .pattern-container {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .pattern-card {
+            background-color: white;
+            width: 250px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .pattern-card h2 {
+            color: #102a43;
+        }
+
+        .rules-section {
+            margin-top: 50px;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #102a43;
+            color: white;
+        }
+
+        footer {
+            margin-top: 50px;
+            background-color: #102a43;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            🚦 TrafficAI
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/index.html">Home</a>
+            <a href="/predict.html">Prediction</a>
+            <a href="/dashboard.html">Dashboard</a>
+            <a href="/patterns.html">Patterns</a>
+            <a href="/reports.html">Reports</a>
+            <a href="/about.html">About</a>
+
+        </div>
+
+    </nav>
+
+
+    <section class="patterns-section">
+
+        <h1>Traffic Pattern Mining</h1>
+
+        <p>
+            Discover important traffic congestion patterns
+            from historical traffic data.
+        </p>
+
+
+        <div class="pattern-container">
+
+            <div class="pattern-card">
+
+                <h2>⏰ Time Pattern</h2>
+
+                <p>
+                    Traffic congestion is highest during
+                    peak hours, especially between
+                    6:00 PM and 8:00 PM.
+                </p>
+
+            </div>
+
+
+            <div class="pattern-card">
+
+                <h2>📅 Day Pattern</h2>
+
+                <p>
+                    Weekdays generally show higher traffic
+                    congestion compared to weekends.
+                </p>
+
+            </div>
+
+
+            <div class="pattern-card">
+
+                <h2>📍 Location Pattern</h2>
+
+                <p>
+                    Major junctions and city center roads
+                    experience higher congestion.
+                </p>
+
+            </div>
+
+
+            <div class="pattern-card">
+
+                <h2>🌧 Weather Pattern</h2>
+
+                <p>
+                    Rainy weather combined with high
+                    vehicle count can increase congestion.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="rules-section">
+
+            <h2>🔍 Mined Traffic Patterns</h2>
+
+            <table>
+
+                <tr>
+                    <th>Traffic Conditions</th>
+                    <th>Result</th>
+                </tr>
+
+                <tr>
+                    <td>Rainy + Evening</td>
+                    <td>High Congestion</td>
+                </tr>
+
+                <tr>
+                    <td>Weekday + 8 AM</td>
+                    <td>High Congestion</td>
+                </tr>
+
+                <tr>
+                    <td>City Center + 6 PM</td>
+                    <td>High Congestion</td>
+                </tr>
+
+                <tr>
+                    <td>High Vehicle Count + Rain</td>
+                    <td>High Congestion</td>
+                </tr>
+
+            </table>
+
+        </div>
+       
+
+<!-- Top 10 Most Congested Cities -->
+<div class="rules-section">
+    <h2>Top 10 Most Congested Cities</h2>
+
+    <table>
+        <tr>
+            <th>Rank</th>
+            <th>City</th>
+            <th>Average TCI</th>
+            <th>Congestion Level</th>
+        </tr>
+        <tbody id="topCities"></tbody>
+    </table>
+</div>
+
+<!-- Congestion Category Summary -->
+<div class="rules-section">
+    <h2>Congestion Category Summary</h2>
+
+    <table>
+        <tr>
+            <th>Category</th>
+            <th>Number of Cities</th>
+        </tr>
+        <tbody id="categorySummary"></tbody>
+    </table>
+
+    <p id="patternMessage">Loading traffic data...</p>
+</div>
+
+</section>
+
+
+
+    <footer>
+
+        <p>
+            © 2026 Traffic Congestion Pattern Mining System
+        </p>
+
+        <p>
+            Academic Project
+        </p>
+
+    </footer>
+
+<script>
+async function loadPatterns() {
+    try {
+        const response = await fetch("/api/patterns");
+
+        if (!response.ok) {
+            throw new Error("Could not load traffic patterns");
+        }
+
+        const result = await response.json();
+
+        // Display top 10 congested cities
+        const topCities = document.getElementById("topCities");
+        topCities.innerHTML = "";
+
+        result.topCities.forEach((city, index) => {
+            const row = document.createElement("tr");
+
+            [
+                index + 1,
+                city.City,
+                Number(city.AverageTCI).toFixed(2),
+                city.CongestionLevel
+            ].forEach(value => {
+                const cell = document.createElement("td");
+                cell.textContent = value;
+                row.appendChild(cell);
+            });
+
+            topCities.appendChild(row);
+        });
+
+        // Display actual congestion category counts
+        const categorySummary =
+            document.getElementById("categorySummary");
+
+        categorySummary.innerHTML = "";
+
+        const categories = result.categories || {};
+
+        ["Low", "Medium", "High"].forEach(category => {
+            const row = document.createElement("tr");
+
+            const nameCell = document.createElement("td");
+            nameCell.textContent = category;
+
+            const countCell = document.createElement("td");
+            countCell.textContent = categories[category] || 0;
+
+            row.appendChild(nameCell);
+            row.appendChild(countCell);
+
+            categorySummary.appendChild(row);
+        });
+
+        // Display the backend's explanation
+        document.getElementById("patternMessage").textContent =
+            result.note || "Traffic pattern analysis completed.";
+
+    } catch (error) {
+        console.error("Patterns loading error:", error);
+
+        document.getElementById("patternMessage").textContent =
+            "Unable to load traffic patterns. Check the Flask server and browser console.";
+    }
+}
+
+loadPatterns();
+</script>
+</body>
+
+</html>

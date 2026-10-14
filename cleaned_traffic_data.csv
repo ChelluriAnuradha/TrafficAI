@@ -1,0 +1,69 @@
+Rank,City,AverageTCI,MaxTCI,CongestionLevel
+1,Lagos,60.16,130.21,High
+2,Riga,47.12,87.51,High
+3,Mumbai,38.37,153.41,Medium
+4,Tehran,38.2,110.12,Medium
+5,London,38.16,128.5,Medium
+6,Mexico City,35.94,169.08,Medium
+7,Kraków,35.83,114.84,Medium
+8,New York City,33.77,123.34,Medium
+9,Warsaw,33.37,131.22,Medium
+10,Lima,32.71,99.08,Medium
+11,Bogotá,29.69,103.1,Medium
+12,Jakarta,29.55,132.36,Medium
+13,São Paulo,28.53,125.47,Medium
+14,Cairo,28.46,115.55,Medium
+15,?ód?,27.61,108.14,Medium
+16,Bucuresti,26.3,114.13,Medium
+17,Istanbul,25.41,169.65,Medium
+18,Dublin,24.4,109.51,Medium
+19,Brussels,24.22,119.05,Medium
+20,Rio de Janeiro,24.03,98.27,Medium
+21,Budapest,23.88,108.99,Medium
+22,Bangkok,22.9,138.51,Medium
+23,Moscow,21.43,129.43,Medium
+24,Birmingham,21.02,101.07,Medium
+25,Stockholm,20.97,158.14,Medium
+26,Paris,20.39,69.77,Medium
+27,Leeds,20.13,115.35,Medium
+28,Athens,19.57,136.62,Low
+29,Bangalore,18.48,59.32,Low
+30,Chennai,18.17,114.54,Low
+31,New Delhi,17.94,57.99,Low
+32,Berlin,17.75,89.81,Low
+33,Riyadh,17.51,107.16,Low
+34,Saint Petersburg,17.24,100.4,Low
+35,Vienna,16.79,84.58,Low
+36,Prague,15.83,56.47,Low
+37,Vilnius,15.65,104.16,Low
+38,Barcelona,15.13,138.36,Low
+39,Santiago,13.89,105.0,Low
+40,Palermo,13.45,53.22,Low
+41,Hyderabad,12.19,56.52,Low
+42,Marseille,11.77,79.38,Low
+43,Milan,11.3,68.14,Low
+44,Frankfurt,11.21,71.51,Low
+45,Yangon,11.18,41.82,Low
+46,Lisbon,11.01,87.53,Low
+47,Cologne,10.46,46.33,Low
+48,Rome,10.4,72.47,Low
+49,Ankara,10.04,56.81,Low
+50,Tokyo,10.03,72.61,Low
+51,Casablanca,8.78,38.7,Low
+52,Karachi,7.98,133.74,Low
+53,Ahmedabad,7.58,34.99,Low
+54,Madrid,6.9,69.43,Low
+55,Zagreb,6.82,44.77,Low
+56,Seville,6.76,92.61,Low
+57,Amsterdam,6.74,37.29,Low
+58,Hong Kong,6.72,75.85,Low
+59,Hamburg,6.28,60.09,Low
+60,Sofia,6.25,39.1,Low
+61,Copenhagen,5.79,46.06,Low
+62,Munich,5.56,37.67,Low
+63,Lahore,5.42,25.14,Low
+64,Singapore,5.23,42.93,Low
+65,Helsinki,4.67,22.43,Low
+66,Turin,4.29,46.2,Low
+67,Valencia,3.4,31.97,Low
+68,Zaragoza,2.01,42.18,Low
